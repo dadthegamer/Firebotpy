@@ -6,12 +6,13 @@ From Firebots Website:
 
 
 You must first pass through the local directory as well as the base url and and port for the api. Below is an example. 
-api = Firebot(f"C:/Users/user/AppData/Roaming/",
+from firebotpy import firebot
+api = firebotFirebot(f"C:/Users/user/AppData/Roaming/",
               "http://localhost:7472/")
 Once you do that you can trigger a method:
-EXAMPLE: api.get(status)
+EXAMPLE: api.bot_chat("Test Message")
 
-After you have established your connected you can then trigger effects. Below are the currently supported effects.
+Below are the currently supported effects.
 
 Everything is caps sensitive
 get_status = returns the connection status of the bot
