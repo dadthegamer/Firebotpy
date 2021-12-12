@@ -586,10 +586,3 @@ class Firebot:
                          headers={"content-type": "application/json"})
         rjson = r.json()
         return rjson
-
-
-api = Firebot(f"C:/Users/baile/AppData/Roaming/",
-              "http://localhost:7472/")
-
-
-api.disable_allconnections()
