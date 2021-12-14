@@ -93,6 +93,38 @@ class Firebot:
         message = "Successfully sent chat message as bot"
         self.sendit(data, message)
 
+    def whisper_chatbot(self, username, chatmessage):
+        data = {
+            "effects": {
+                "list": [
+                    {
+                        "type": "firebot:chat",
+                        "chatter": "Bot",
+                        "whisper": username,
+                        "message": chatmessage,
+                    }
+                ]
+            }
+        }
+        message = "Successfully sent whisper chat message as bot"
+        self.sendit(data, message)
+
+    def whisper_chatstreamer(self, username, chatmessage):
+        data = {
+            "effects": {
+                "list": [
+                    {
+                        "type": "firebot:chat",
+                        "chatter": "Streamer",
+                        "whisper": username,
+                        "message": chatmessage,
+                    }
+                ]
+            }
+        }
+        message = "Successfully sent whisper chat message as streamer"
+        self.sendit(data, message)
+
     def streamer_chat(self, chatmessage):
         data = {
             "effects": {
@@ -222,12 +254,13 @@ class Firebot:
         message = "Successfully executed AWS Polly effect"
         self.sendit(data, message)
 
-    def customvariable(self, varname, vardata):
+    def customvariable(self, varname, vardata, duration=0):
         data = {
             "effects": {
                 "list": [
                     {
                         "type": "firebot:customvariable",
+                        "ttl": duration,
                         "name": varname,
                         "variableData": vardata,
                     }
@@ -586,3 +619,13 @@ class Firebot:
                          headers={"content-type": "application/json"})
         rjson = r.json()
         return rjson
+
+    def get_countervalue(self, name):
+        with open(f'{self.directory}Firebot/v5/profiles/Main Profile/counters/counters.json', 'r') as f:
+            data = json.load(f)
+        counters = data.keys()
+        for counter in counters:
+            if name == data[counter]['name']:
+                value = int(data[counter]['value'])
+        f.close()
+        return value
