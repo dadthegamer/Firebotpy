@@ -10,7 +10,8 @@ From Firebots Website: <br>
 
 # Change Log
 
-2.30 (16/12/2021)
+## 2.30 (16/12/2021)
+
 -Add or remove currency from all online viewers <br>
 -Add or remove currency from a specific role <br>
 
