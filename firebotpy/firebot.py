@@ -585,7 +585,7 @@ class Firebot:
         response = requests.post(f"{self.url}api/v1/effects/",
                                  headers={"content-type": "application/json"}, data=json.dumps(data))
         if response.json() == {"status": "success"}:
-            print(printmessage)
+            pass
         else:
             print("Failed")
 
@@ -619,6 +619,26 @@ class Firebot:
                          headers={"content-type": "application/json"})
         rjson = r.json()
         return rjson
+
+    def get_allvariable(self):
+        r = requests.get(f"{self.url}api/v1/custom-variables",
+                         headers={"content-type": "application/json"})
+        rjson = r.json()
+        return rjson
+
+    def get_topcurrency(self, name, count = 10):
+        r = requests.get(f"{self.url}api/v1/currency/{name}/top?count={count}",
+                         headers={"content-type": "application/json"})
+        rjson = r.json()
+        currency_list = []
+        id = self.get_currencyid(name)
+        for users in rjson:
+            userdict = {}
+            username = users['username']
+            amount = users['currency'][id]
+            userdict = {'username': username, 'amount': amount}
+            currency_list.append(userdict)
+        return currency_list
 
     def get_countervalue(self, name):
         with open(f'{self.directory}Firebot/v5/profiles/Main Profile/counters/counters.json', 'r') as f:
@@ -745,3 +765,10 @@ class Firebot:
         }
         message = f"Successfully removed {amount} {currency} to all users in {role} role"
         self.sendit(data, message)
+
+
+api = Firebot(f"//LAPTOP-54QGG5Q5/Users/baile/AppData/Roaming/",
+                      "http://192.168.1.23:7472/")
+
+cur = api.get_topcurrency("Points", count= 1)
+print(cur)
