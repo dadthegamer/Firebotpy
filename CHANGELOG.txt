@@ -1,6 +1,13 @@
 Change Log
 ===========
-2.30 (16/12/2021)
+2.33 (7/01/2021)
+-----------------------
+-Added get_allvariables method which will return all variables in firebot as a dict
+-Added the ability to get the top currency holders of a given currency. 
+-Removed print message on success
+
+2.31 (16/12/2021)
+-----------------------
 -Add or remove currency from all online viewers <br>
 -Add or remove currency from a specific role <br>
 
