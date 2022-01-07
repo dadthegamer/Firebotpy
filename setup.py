@@ -6,7 +6,7 @@ with open("README.md", "r") as f:
 setup(
     name="firebotpy",
     packages=["firebotpy"],
-    version="2.30",
+    version="2.32",
     license="MIT",
     description="Python library to connect to Firebots API",
     long_description=long_description,
