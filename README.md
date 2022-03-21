@@ -1,4 +1,4 @@
-This is a firebot library to connect to Firebots API. <br>
+This is a firebot library to connect to Firebots API. This is a standalone project that is not associated with the offical firebot. <br>
 
 ```
 pip install firebotpy
@@ -10,7 +10,11 @@ From Firebots Website: <br>
 
 # Change Log
 
-## 2.30 (16/12/2021)
+## 2.40 (03/21/2022)
+-Added error handling when sending data <br>
+-Added a brief description to each method <br>
+
+## 2.31 (16/12/2021)
 
 -Add or remove currency from all online viewers <br>
 -Add or remove currency from a specific role <br>

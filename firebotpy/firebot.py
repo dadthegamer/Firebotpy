@@ -71,14 +71,22 @@ class Firebot:
         return presetdict
 
     def get_status(self):
-        response = requests.get(self.url+"api/v1/status")
-        if response.json() == {'connections': {'chat': True}}:
-            status = "Firebot chat is connected"
-        else:
-            status = "Firebot chat is not connected"
-        return status
+        attempts = 0
+        while attempts <= 5:
+            try:
+                response = requests.get(self.url+"api/v1/status")
+                if response.json() == {'connections': {'chat': True}}:
+                    status = "Firebot chat is connected"
+                else:
+                    status = "Firebot chat is not connected"
+                return status
+            except:
+                attempts += 1
 
     def bot_chat(self, chatmessage):
+        """
+        Send a message as the bot.
+        """
         data = {
             "effects": {
                 "list": [
@@ -94,6 +102,9 @@ class Firebot:
         self.sendit(data, message)
 
     def whisper_chatbot(self, username, chatmessage):
+        """
+        Send a whisper message as the bot.
+        """
         data = {
             "effects": {
                 "list": [
@@ -110,6 +121,9 @@ class Firebot:
         self.sendit(data, message)
 
     def whisper_chatstreamer(self, username, chatmessage):
+        """
+        Send a whisper message as the streamer.
+        """
         data = {
             "effects": {
                 "list": [
@@ -126,6 +140,9 @@ class Firebot:
         self.sendit(data, message)
 
     def streamer_chat(self, chatmessage):
+        """
+        Send a message in chat as the streamer.
+        """
         data = {
             "effects": {
                 "list": [
@@ -141,6 +158,9 @@ class Firebot:
         self.sendit(data, message)
 
     def enable_twitchconnection(self):
+        """
+        Turn on Twitch connection.
+        """
         data = {
             "effects": {
                 "list": [
@@ -162,6 +182,9 @@ class Firebot:
         self.sendit(data, message)
 
     def disable_twitchconnection(self):
+        """
+        Turn off Twitch connection.
+        """
         data = {
             "effects": {
                 "list": [
@@ -183,6 +206,9 @@ class Firebot:
         self.sendit(data, message)
 
     def enable_allconnections(self):
+        """
+        Turn on all connections.
+        """
         data = {
             "effects": {
                 "list": [
@@ -239,6 +265,9 @@ class Firebot:
         self.sendit(data, message)
 
     def aws_polly(self, message, voiceid, volume):
+        """
+        Sends a message to Amazon Polly. Must have Amazon Polly set up in firebot
+        """
         data = {
             "effects": {
                 "list": [
@@ -255,6 +284,9 @@ class Firebot:
         self.sendit(data, message)
 
     def customvariable(self, varname, vardata, duration=0):
+        """
+        Sets the value of a custom variable.
+        """
         data = {
             "effects": {
                 "list": [
@@ -271,6 +303,9 @@ class Firebot:
         self.sendit(data, message)
 
     def add_currency(self, currency, amount, username):
+        """
+        Add currency to a user.
+        """
         currencyid = self.get_currencyid(currency)
         data = {
             "effects": {
@@ -290,6 +325,9 @@ class Firebot:
         self.sendit(data, message)
 
     def subtract_currency(self, currency, amount, username):
+        """
+        Subtracts currency from a user.
+        """
         currencyid = self.get_currencyid(currency)
         data = {
             "effects": {
@@ -309,6 +347,9 @@ class Firebot:
         self.sendit(data, message)
 
     def set_currency(self, currency, amount, username):
+        """
+        Sets the currency value for a user.
+        """
         currencyid = self.get_currencyid(currency)
         data = {
             "effects": {
@@ -328,6 +369,9 @@ class Firebot:
         self.sendit(data, message)
 
     def celebration(self, celebrationtype, celebrationtime):
+        """
+        Trigger a firebot celebration. Either Fireworks or Confetti.
+        """
         if celebrationtype == "Fireworks" or celebrationtype == "Confetti":
             data = {
                 "effects": {
@@ -346,6 +390,9 @@ class Firebot:
             return "Celebration type must be Fireworks or Confetti. Check capitalization"
 
     def chat_feed_alert(self, message):
+        """
+        Send a chat feed alert.
+        """
         data = {
             "effects": {
                 "list": [
@@ -360,6 +407,9 @@ class Firebot:
         self.sendit(data, message)
 
     def set_counter(self, countername, value):
+        """
+        Set a counter to a specific value.
+        """
         counterid = self.get_counterid(countername)
         data = {
             "effects": {
@@ -377,6 +427,9 @@ class Firebot:
         self.sendit(data, message)
 
     def increment_counter(self, countername, value):
+        """
+        Increment a counter by a specified amount.
+        """
         counterid = self.get_counterid(countername)
         data = {
             "effects": {
@@ -394,6 +447,9 @@ class Firebot:
         self.sendit(data, message)
 
     def add_role(self, role, username):
+        """
+        Add a user to a specific role.
+        """
         roleid = self.get_roleid(role)
         data = {
             "effects": {
@@ -411,6 +467,9 @@ class Firebot:
         self.sendit(data, message)
 
     def add_vip(self, username):
+        """
+        Add a user to VIP.
+        """
         data = {
             "effects": {
                 "list": [
@@ -426,6 +485,9 @@ class Firebot:
         self.sendit(data, message)
 
     def remove_vip(self, username):
+        """
+        Remove a user from VIP.
+        """
         data = {
             "effects": {
                 "list": [
@@ -441,6 +503,9 @@ class Firebot:
         self.sendit(data, message)
 
     def ban_user(self, username):
+        """
+        Ban a user.
+        """
         data = {
             "effects": {
                 "list": [
@@ -456,6 +521,9 @@ class Firebot:
         self.sendit(data, message)
 
     def unban_user(self, username):
+        """
+        Unban a user.
+        """
         data = {
             "effects": {
                 "list": [
@@ -486,6 +554,9 @@ class Firebot:
         self.sendit(data, message)
 
     def remove_allrole(self, role):
+        """
+        Removes all users from a specific role.
+        """
         roleid = self.get_roleid(role)
         data = {
             "effects": {
@@ -502,6 +573,9 @@ class Firebot:
         self.sendit(data, message)
 
     def remove_user_role(self, role, username):
+        """
+        Removes a user from a specific role.
+        """
         roleid = self.get_roleid(role)
         data = {
             "effects": {
@@ -519,6 +593,9 @@ class Firebot:
         self.sendit(data, message)
 
     def set_metadata(self, key, data, username):
+        """
+        Set the metadata for a user.
+        """
         data = {
             "effects": {
                 "list": [
@@ -535,6 +612,9 @@ class Firebot:
         self.sendit(data, message)
 
     def enable_timer(self, timername):
+        """
+        Enable a given timer.
+        """
         timerid = self.get_timerid(timername)
         data = {
             "effects": {
@@ -551,6 +631,9 @@ class Firebot:
         self.sendit(data, message)
 
     def disable_timer(self, timername):
+        """
+        Disable a given timer.
+        """
         timerid = self.get_timerid(timername)
         data = {
             "effects": {
@@ -567,6 +650,9 @@ class Firebot:
         self.sendit(data, message)
 
     def reset_timer(self, timername):
+        """
+        Resets a given timer to its default value.
+        """
         timerid = self.get_timerid(timername)
         data = {
             "effects": {
@@ -582,43 +668,73 @@ class Firebot:
         self.sendit(data, message)
 
     def sendit(self, data, printmessage):
-        response = requests.post(f"{self.url}api/v1/effects/",
-                                 headers={"content-type": "application/json"}, data=json.dumps(data))
-        if response.json() == {"status": "success"}:
-            pass
-        else:
-            print("Failed")
+        attempts = 0
+        while attempts <= 5:
+            try:
+                response = requests.post(f"{self.url}api/v1/effects/",
+                                        headers={"content-type": "application/json"}, data=json.dumps(data))
+                if response.json() == {"status": "success"}:
+                    break
+                else:
+                    print("Failed")
+            except:
+                attempts += 1
 
-    def preset_effect(self, name, arg="null", argdata="null", arg2="null", arg2data="null", arg3="null", arg3data="null"):
+    def preset_effect(self, name, arg="null", argdata="null", arg2="null", arg2data="null", arg3="null", arg3data="null", arg4="null", arg4data="null"):
+        """
+        Triggers a given preset effect list. Able to pass in preset args as well.
+        """
         id = self.get_presetid(name)
         print(id)
         presetarg = {
             "args": {
                 arg: argdata,
                 arg2: arg2data,
-                arg3: arg3data}
+                arg3: arg3data,
+                arg4: arg4data}
         }
-        r = requests.post(f"{self.url}api/v1/effects/preset/" + str(id),
-                          headers={"content-type": "application/json"}, data=json.dumps(presetarg))
-        status = json.loads(r.text)
-        if status['status'] == "success":
-            print(f"Successfully executed {name} preset effect")
-        else:
-            print(
-                f"Failed to execute {name} preset effect. Check spelling and capitalization")
+        attempts = 0
+        while attempts <= 5:
+            try:
+                r = requests.post(f"{self.url}api/v1/effects/preset/" + str(id),
+                                headers={"content-type": "application/json"}, data=json.dumps(presetarg))
+                status = json.loads(r.text)
+                if status['status'] == "success":
+                    print(f"Successfully executed {name} preset effect")
+                else:
+                    print(
+                        f"Failed to execute {name} preset effect. Check spelling and capitalization")
+            except:
+                attempts += 1
 
     def get_currency(self, username, currency):
+        """
+        Retrives how much currency a specific user has
+        """
         currencyid = self.get_currencyid(currency)
-        r = requests.get(f"{self.url}api/v1/viewers/{username}/currency/{currencyid}?username=true",
-                         headers={"content-type": "application/json"})
-        rjson = r.json()
-        return rjson
+        attempts = 0
+        while attempts <= 5:
+            try:
+                r = requests.get(f"{self.url}api/v1/viewers/{username}/currency/{currencyid}?username=true",
+                                headers={"content-type": "application/json"})
+                rjson = r.json()
+                return rjson
+            except:
+                attempts += 1
 
     def get_variable(self, var):
-        r = requests.get(f"{self.url}api/v1/custom-variables/{var}",
-                         headers={"content-type": "application/json"})
-        rjson = r.json()
-        return rjson
+        """
+        Retrives the value of a given variable
+        """
+        attempts = 0
+        while attempts <= 5:
+            try:
+                r = requests.get(f"{self.url}api/v1/custom-variables/{var}",
+                                headers={"content-type": "application/json"})
+                rjson = r.json()
+                return rjson
+            except:
+                attempts += 1
 
     def get_allvariable(self):
         r = requests.get(f"{self.url}api/v1/custom-variables",
@@ -627,20 +743,31 @@ class Firebot:
         return rjson
 
     def get_topcurrency(self, name, count = 10):
-        r = requests.get(f"{self.url}api/v1/currency/{name}/top?count={count}",
-                         headers={"content-type": "application/json"})
-        rjson = r.json()
-        currency_list = []
-        id = self.get_currencyid(name)
-        for users in rjson:
-            userdict = {}
-            username = users['username']
-            amount = users['currency'][id]
-            userdict = {'username': username, 'amount': amount}
-            currency_list.append(userdict)
-        return currency_list
+        """
+        Retrives the top users in a specific currency. Defaults to top 10
+        """
+        attempts = 0
+        while attempts <= 5:
+            try:
+                r = requests.get(f"{self.url}api/v1/currency/{name}/top?count={count}",
+                                headers={"content-type": "application/json"})
+                rjson = r.json()
+                currency_list = []
+                id = self.get_currencyid(name)
+                for users in rjson:
+                    userdict = {}
+                    username = users['username']
+                    amount = users['currency'][id]
+                    userdict = {'username': username, 'amount': amount}
+                    currency_list.append(userdict)
+                return currency_list
+            except:
+                attempts += 1
 
     def get_countervalue(self, name):
+        """
+        Retrives the value of a specific counter
+        """
         with open(f'{self.directory}Firebot/v5/profiles/Main Profile/counters/counters.json', 'r') as f:
             data = json.load(f)
         counters = data.keys()
@@ -651,6 +778,9 @@ class Firebot:
         return value
 
     def view_rolemembers(self, rolename, username):
+        """
+        View all members in a specific role
+        """
         with open(f'{self.directory}Firebot/v5/profiles/Main Profile/roles/customroles.json', 'r') as f:
             data = json.load(f)
         roles = data.keys()
@@ -766,9 +896,3 @@ class Firebot:
         message = f"Successfully removed {amount} {currency} to all users in {role} role"
         self.sendit(data, message)
 
-
-api = Firebot(f"//LAPTOP-54QGG5Q5/Users/baile/AppData/Roaming/",
-                      "http://192.168.1.23:7472/")
-
-cur = api.get_topcurrency("Points", count= 1)
-print(cur)
