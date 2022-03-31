@@ -1,3 +1,4 @@
+from types import NoneType
 import requests
 import json
 
@@ -76,10 +77,49 @@ class Firebot:
             try:
                 response = requests.get(self.url+"api/v1/status")
                 if response.json() == {'connections': {'chat': True}}:
-                    status = "Firebot chat is connected"
+                    status = True
                 else:
-                    status = "Firebot chat is not connected"
+                    status = False
                 return status
+            except:
+                attempts += 1
+
+    def get_allviewers(self):
+        """
+        Returns a list of all users in the firebot database.
+        """
+        attempts = 0
+        while attempts <= 5:
+            try:
+                response = requests.get(self.url+"api/v1/viewers")
+                rjson = response.json()
+                return rjson
+            except:
+                attempts += 1
+
+    def get_userdata(self, username):
+        """
+        Returns all data associated with a user.
+        """
+        attempts = 0
+        while attempts <= 5:
+            try:
+                response = requests.get(f'{self.url}api/v1/viewers/{username}?username=true')
+                rjson = response.json()
+                return rjson
+            except:
+                attempts += 1
+
+    def get_user_metadata(self, username, metadata):
+        """
+        Returns metadata associated with a user.
+        """
+        attempts = 0
+        while attempts <= 5:
+            try:
+                response = requests.get(f'{self.url}api/v1/viewers/{username}?username=true')
+                rjson = response.json()['metadata'][metadata]
+                return rjson
             except:
                 attempts += 1
 
@@ -673,10 +713,7 @@ class Firebot:
             try:
                 response = requests.post(f"{self.url}api/v1/effects/",
                                         headers={"content-type": "application/json"}, data=json.dumps(data))
-                if response.json() == {"status": "success"}:
-                    break
-                else:
-                    print("Failed")
+                break
             except:
                 attempts += 1
 
@@ -701,6 +738,7 @@ class Firebot:
                 status = json.loads(r.text)
                 if status['status'] == "success":
                     print(f"Successfully executed {name} preset effect")
+                    return
                 else:
                     print(
                         f"Failed to execute {name} preset effect. Check spelling and capitalization")

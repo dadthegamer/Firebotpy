@@ -1,6 +1,21 @@
 Change Log
 ===========
-2.33 (7/01/2021)
+2.50 (03/31/2022)
+-----------------------
+-Added ability to get metadata for a users
+-Added get_allviewers method to return a list of all viewers in the database
+-Changed get_status method to get a boolean type. Returns True if connected and False if not connected
+
+2.41 (03/21/2022)
+-----------------------
+-Bug Fixes
+
+2.40 (03/21/2022)
+-----------------------
+-Added error handling when sending data
+-Added a brief description to each method
+
+2.34 (7/01/2021)
 -----------------------
 -Added get_allvariables method which will return all variables in firebot as a dict
 -Added the ability to get the top currency holders of a given currency. 

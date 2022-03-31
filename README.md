@@ -10,6 +10,14 @@ From Firebots Website: <br>
 
 # Change Log
 
+## 2.50 (03/31/2022)
+-Added ability to get metadata for a users <br>
+-Added get_allviewers method to return a list of all viewers in the database <br>
+-Changed get_status method to get a boolean type. Returns True if connected and False if not connected <br>
+
+## 2.41 (03/21/2022)
+-Bug Fixes <br>
+
 ## 2.40 (03/21/2022)
 -Added error handling when sending data <br>
 -Added a brief description to each method <br>
