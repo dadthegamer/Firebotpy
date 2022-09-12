@@ -1,12 +1,11 @@
-from setuptools import setup
+from setuptools import setup, find_packages
 
 with open("README.md", "r") as f:
     long_description = f.read()
 
 setup(
     name="firebotpy",
-    packages=["firebotpy"],
-    version="2.50",
+    version="4.0",
     license="MIT",
     description="Python library to connect to Firebots API",
     long_description=long_description,
@@ -17,9 +16,10 @@ setup(
     download_url="https://github.com/whatupcraig/Firebotpy.git",
     keywords=["firebot", "api", "twitch"],
     install_requires=["requests"],
+    packages=find_packages(),
     classifiers=[
         # Chose either "3 - Alpha", "4 - Beta" or "5 - Production/Stable" as the current state of your package
-        "Development Status :: 3 - Alpha",
+        "Development Status :: 5 - Production/Stable",
         "Intended Audience :: Developers",  # Define that your audience are developers
         "License :: OSI Approved :: MIT License",
         "Programming Language :: Python :: 3",

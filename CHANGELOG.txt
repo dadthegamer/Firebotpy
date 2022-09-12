@@ -1,5 +1,22 @@
 Change Log
 ===========
+4.0 (09/12/2022)
+-----------------------
+-Enable and disable timers
+-Firebot Text To Speech
+-Role Management
+-Get, set, increase counters
+-Get system and custom commands
+
+3.01 (08/26/2022)
+-----------------------
+-Rewrote the entire library. No longer need to reference the text file in the local firebot directory
+-Added Announce messages
+-Added ability to retrive quotes
+-Added ability to make new quotes
+-Remove user metadata
+-Can retrieve user metadata stored in firebots database
+
 2.50 (03/31/2022)
 -----------------------
 -Added ability to get metadata for a users

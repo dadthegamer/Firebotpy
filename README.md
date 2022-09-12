@@ -1,4 +1,4 @@
-This is a firebot library to connect to Firebots API. This is a standalone project that is not associated with the offical firebot. <br>
+This is a pyhton libary to connect to Firebots API. This is a standalone project that is not associated with the offical firebot. <br>
 
 ```
 pip install firebotpy
@@ -9,6 +9,20 @@ From Firebots Website: <br>
 "Firebot is a fully featured open-source bot that can help level up your streams." <br>
 
 # Change Log
+## 4.0 (09/12/2022)
+-Enable and disable timers <br>
+-Firebot Text To Speech <br>
+-Role Management <br>
+-Get, set, increase counters <br>
+-Get system and custom commands <br>
+
+## 3.01 (08/26/2022)
+-Rewrote the entire library. No longer need to reference the text file in the local firebot directory. Assumes bot is on localhost <br>
+-Added Announce messages <br>
+-Added ability to retrive quotes <br>
+-Added ability to make new quotes <br>
+-Can remove metadata <br>
+-Can retrieve user metadata stored in firebots database <br>
 
 ## 2.50 (03/31/2022)
 -Added ability to get metadata for a users <br>
